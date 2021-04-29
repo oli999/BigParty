@@ -7,7 +7,30 @@
     <title>gyuhwan.html</title>
 </head>
 <body>
-    <img src="c:/acorn202104/visual_work/html/images/thanos.jpg" alt="">
-    <p>I am inevitable</p>
+    <h1>이번 주의 로또 번호를 알려드리겠습니다 !.! </h1>
+    <div id="box">
+    <img id ="img" src="c:/acorn202104/visual_work/html/images/kim1.png" alt="">
+    <br>
+    </div>
+    <br>
+    <button id="Btn">자! 갑시다!</button>
+    <script>
+        let list =[];
+        document.querySelector("#Btn").addEventListener("click", function(){
+            div = document.querySelector("#box")
+            for(let i=0; i<6; i++){
+                let ranNum = Math.floor(Math.random()*45);
+                let ran = ranNum+1;
+                list.push(ran);
+                let img = document.createElement("img");
+                let path = "c:/acorn202104/visual_work/html/images/lotto-ball-" + ran + ".png"
+                img.setAttribute("src", path)
+                img.setAttribute("height", "200");
+                img.setAttribute("width", "200");
+                div.append(img);
+            }
+        })
+    </script>
+    
 </body>
 </html>
