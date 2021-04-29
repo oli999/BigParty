@@ -5,9 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eunjung.html</title>
+    <style>
+        #ej{
+            background-color: rosybrown;
+            color: seagreen;
+        }
+        button{
+            background-color: silver;
+          
+        }
+    </style>
 </head>
 <body>
-    <p>은정쓰가 만듬</p>
-
+    <p id="ej">은정쓰가 만듬</p>
+    <button id="lunchBtn">메뉴정하기</button>
+    <p id="result"></p>
+    <script>
+        let menus=["김치찌개","마라탕","된장찌개","피자","치킨"];
+        document.querySelector("#lunchBtn").addEventListener("click",function(){
+            let ranNum = Math.floor(Math.random()*5);
+            document.querySelector("#result").innerText="오늘 메뉴는 " + menus[ranNum];
+        });
+    </script>
 </body>
 </html>
