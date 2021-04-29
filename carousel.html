@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- 확대 혹은 축소를 막으려면 user-scalable=no-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>3dResponsiveCarousel.html</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+  <!-- ie8 을 지원하기 위한 javascript -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <style>
+  .wrapper {
+    -webkit-perspective: 1000px;
+    -webkit-perspective-origin: 50% 50%;
+  }
+  .carousel {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 400px;
+    -webkit-transform-style: preserve-3d;
+  }
+  /* transition 효과를 동적으로 적용하기 위해 */
+  .transition{
+     -webkit-transition: -webkit-transform 0.3s ease-out;
+  }
+  .carousel div {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    border: 1px solid red;
+    /*-webkit-backface-visibility: hidden;*/
+  }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <div class="carousel">
+        <div>
+          <h3>one</h3>
+          <img src="images/1.jpg" width="200">
+        </div>
+        <div>
+          <h3>two</h3>
+          <img src="images/2.jpg" width="200">
+        </div>
+        <div>
+          <h3>three</h3>
+          <img src="images/3.jpg" width="200">
+        </div>
+        <div>
+          <h3>four</h3>
+          <img src="images/4.jpg" width="200">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-3">
+          <button id="prevBtn" class="btn btn-primary btn-block">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            Prev</button>
+        </div>
+        <div class="col-xs-3">
+          <button id="nextBtn" class="btn btn-primary btn-block">Next
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/jquery-1.11.2.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.touchSwipe.js"></script>
+  <script>
+
+  //문서가 처음 로딩될때 .wrapper 의 폭을 얻어온다.
+  var width=$(".wrapper").width();
+  //z 축 평행이동해야 되는 거리
+  var tz;
+  //배치될때 회전하는 각도
+  var angle;
+  //y 축 회전값을 저장할 변수
+  var rY = 0;
+
+  initCarousel();
+
+  //window 가 리사이즈 되었다면 실행할 함수 등록
+  $(window).resize(function(){
+    //폭을 다시 얻어온다.
+    width=$(".wrapper").width();
+    //다시 배치
+    initCarousel();
+  });
+
+  //carousel 을 배치하는 함수 
+  function initCarousel(){
+    //transition 효과 제거하기 
+    $(".carousel").removeClass("transition");
+
+    //4 각형의 폭이 width 일때 angle 과 tz 값을 얻어온다.
+    var data=getAngleNtz(4, width);
+    //tz 와 angle 값을 얻어온다.
+    tz=data.tz;
+    angle=data.angle;
+    //.carousel 을 뒤로 밀기
+    $(".carousel").css("-webkit-transform","translateZ(-"+tz+"px)");
+    var tmpY=0;
+    //div 4 개를 반복문돌면서 transform  하기
+    for(var i=0; i<4 ; i++){
+      $(".carousel>div").eq(i)
+      .css("-webkit-transform","rotateY("+tmpY+"deg) translateZ("+tz+"px)");
+      tmpY += angle;
+    }
+    //rY 반영 
+    rotateY();
+  }
+
+  //이전 버튼을 눌렀을때 실행할 함수 등록
+  $("#prevBtn").click(function() {
+    //transition 효과 추가하기 
+    $(".carousel").addClass("transition");
+    rY += angle;
+    rotateY();
+  });
+  //다음 버튼을 눌렀을때 실행할 함수 등록 
+  $("#nextBtn").click(function() {
+    //transition 효과 추가하기 
+    $(".carousel").addClass("transition");
+    rY -= angle;
+    rotateY();
+  });
+
+  //.carousel 의 회전값에 rY 를 반영하는 함수 
+  function rotateY(){
+    var value="translateZ(-"+tz+"px) rotateY("+rY+"deg)";
+    $(".carousel").css("-webkit-transform", value);
+  }
+
+  //n 각형의 폭을 함수에 전달하면 div 를 배치할때 rotateY 값과 translateZ 가 Object 로 리턴되는 함수 
+  function getAngleNtz(n, width) {
+    var angle = Math.round(360 / n);
+    var tz = Math.round((width / 2) / Math.tan((angle * Math.PI) / (2 * 180)));
+    var obj = {
+      angle: angle,
+      tz: tz
+    };
+    return obj;
+  }
+
+  //터치가 시작된 시점의 rY 를 저장할 변수
+  var startRY=0;
+
+  //swipe 이벤트 처리하기
+  $(".wrapper").swipe({
+    swipeStatus:function(event,phase,direction,distance){
+      switch(phase){
+        case "start":
+          //transition 제거
+          $(".carousel").removeClass("transition");
+          //터치 시작된 시점의 rY 를 변수에 저장한다.
+          startRY = rY;
+          break;
+        case "move":
+          if(direction=="left"){
+            //스와이프한 거리에 비례해서 rY 에 반영한다.
+            rY = startRY - distance/8;
+          }else if(direction=="right"){
+            rY = startRY + distance/8;
+          }
+          //.carousel 회전 시키기
+          rotateY();
+          break;
+        case "end":
+          //transition 효과 추가 하기
+          $(".carousel").addClass("transition");
+          if(direction=="left"){
+            rY = startRY - 90;
+          }else if(direction=="right"){
+            rY = startRY + 90;
+          }
+          rotateY();
+          break;
+        case "cancel":
+          $(".carousel").addClass("transition");
+          //취소 되었을때는 원상 복구 
+          rY = startRY;
+          rotateY();
+          break;
+      }
+    },
+    allowPageScroll:"vertical"
+  });
+  </script>
+</body>
+
+</html>
