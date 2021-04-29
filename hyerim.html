@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hyerim.html</title>
     <style>
-        button{
+        #getBtn{
             width: 200px;
             height: 80px;
             color: white;
@@ -16,7 +16,13 @@
 </head>
 <body>
     <h1>윤혜림이 만들었습니다.</h1>
-    <button>버튼만들기</button>
+    <button id="getBtn">버튼만들기</button>
+
+    <script>
+        document.querySelector("#getBtn").addEventListener("click",function(){
+            alert("잘 만들었다!");
+        });
+    </script>
 
 </body>
 </html>
