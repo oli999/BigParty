@@ -11,16 +11,19 @@
         body{
         font-family: 'Do Hyeon', sans-serif;
         background-color: lightgray;
+        text-align: center;
         }
         h1{
-            text-shadow:0px 0px 3px tomato;
+            text-shadow:0px 0px 4px tomato;
             color: white;
+     
         }
         fieldset{
-            width: 400px;
+            width: 350px;
             height: 50px;
             border: 2px solid slateblue;
             border-radius: 10px;
+            display: inline-block;
         }
         legend{
             text-align: center;
@@ -54,19 +57,50 @@
             color: white;
             background-color: slateblue;
         }
+        nav ul{
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav li{
+            float:inline-start
+        }
+        nav{
+            overflow: auto;
+        }
+        nav a{
+            text-decoration: none;
+            color: rgb(75, 41, 75);
+            display: block;
+            padding: 10px 20px;
+        }
+        nav a:hover, nav a:focus{
+            color: slateblue;
+            background-color: white;
+            text-shadow:0px 0px 1px slateblue;
+        }
     </style>
 </head>
 <body>
-    <h1>Hannah's JellyFish</h1>
+    <h1>JellyFish Island</h1>
     <img src="Berry01.png" alt="Image">
+    <br>
     <fieldset>
         <legend>두구두구한 음악 재생</legend>
         <span id="musicBtn">
         <button id="playBtn">play</button>
         <button id="pauseBtn">pause</button>
         </span>
-        <span id="nowPlay">Now playing : Hologram-Bobby Richards.mp3</span>
+        <span id="nowPlay">Play : Hologram-Bobby Richards.mp3</span>
     </fieldset>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="DrawPanel.html">DrawPanel</a></li>
+            <li><a href="Game.html">Game</a></li>
+            <li><a href="https://blog.naver.com/kurer456/">Blog</a></li>
+        </ul>
+    </nav>
     <script>
         const sound=new Audio("\Hologram - Bobby Richards.mp3");
         document.querySelector("#playBtn").addEventListener("click", function(){
@@ -75,6 +109,7 @@
         document.querySelector("#pauseBtn").addEventListener("click", function(){
             sound.pause();
         });
+
     </script>
 </body>
 </html>
