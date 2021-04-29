@@ -1,0 +1,613 @@
+body {
+  text-align: center;
+}
+
+li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.rlink {
+  display: var(--rlink-display, inline-flex) !important;
+}
+
+.rlink[href] {
+  color: var(--rlink-color) !important;
+  text-decoration: var(--rlink-text-decoration, none) !important;
+}
+
+.rlink:not([href]) {
+  pointer-events: none; /* 1 */
+}
+
+/*
+  1. Removes the any mouse events, i.e hover that works by default
+  2. Removes text selection
+  */
+
+.rbutton {
+  background-color: var(--rbutton-background-color, transparent) !important;
+  padding: var(
+    --rbutton-padding,
+    var(--rbutton-padding-top, 0) var(--rbutton-padding-right, 0)
+      var(--rbutton-padding-bottom, 0) var(--rbutton-padding-left, 0)
+  ) !important;
+
+  border-width: var(
+    --rbutton-border-width,
+    var(--rbutton-border-top-width, 0) var(--rbutton-border-right-width, 0)
+      var(--rbutton-border-bottom-width, 0) var(--rbutton-border-left-width, 0)
+  ) !important;
+  border-style: var(--rbutton-border-style, solid) !important;
+  border-color: var(--rbutton-border-color, currentcolor) !important;
+
+  font-family: var(--rbutton-font-family, inherit) !important;
+  font-size: var(--rbutton-font-size, 1em) !important;
+  font-weight: var(--rbutton-font-weight, inherit) !important;
+
+  color: var(--rbutton-color, currentcolor) !important;
+  text-align: var(--rbutton-text-align, center) !important;
+  text-transform: var(--rbutton-text-transform, inherit) !important;
+  letter-spacing: var(--rbutton-letter-spacing, inherit) !important;
+  word-spacing: var(--rbutton-word-spacing, inherit) !important;
+
+  text-shadow: var(--rbutton-text-shadow, none) !important;
+  display: var(--rbutton-display, inline-flex) !important;
+}
+
+.rbutton:disabled {
+  pointer-events: none; /* 1 */
+  user-select: none; /* 2 */
+}
+
+.ui-button:not(:disabled) {
+  cursor: var(--uibutton-cursor, pointer);
+}
+
+/*
+  =====
+  OUTLINED TEXT
+  =====
+  */
+
+/* 
+  basic
+  */
+
+.text-outlined {
+  --ui-text-outlined-weight: var(--text-outlined-weight, 2px);
+  --ui-text-outlined-line-color: var(--text-outlined-line-color, currentcolor);
+
+  position: var(--text-outlined-position, relative);
+}
+
+.text-outlined__label {
+  display: var(--text-outlined-label-display, block);
+}
+
+.text-outlined::before,
+.text-outlined::after,
+.text-outlined__label::before,
+.text-outlined__label::after {
+  content: "";
+  background-color: var(--ui-text-outlined-line-color);
+  position: absolute;
+}
+
+.text-outlined::before,
+.text-outlined::after {
+  width: 100%;
+  height: var(--ui-text-outlined-weight);
+  left: 0;
+}
+
+.text-outlined__label::before,
+.text-outlined__label::after {
+  width: var(--ui-text-outlined-weight);
+  height: 100%;
+  top: 0;
+}
+
+.text-outlined::before {
+  top: 0;
+}
+
+.text-outlined::after {
+  bottom: 0;
+}
+
+.text-outlined__label::before {
+  left: 0;
+}
+
+.text-outlined__label::after {
+  right: 0;
+}
+
+/*
+  states
+  */
+
+.text-outlined:disabled {
+  opacity: var(--text-flat-opacity-disabled, 0.5);
+}
+
+/*
+  adapters
+  */
+
+.text-outlined:not(.rlink, .rbutton) {
+  display: var(--text-outlined-display, inline-flex);
+  color: var(--text-outlined-color, currentcolor);
+}
+
+.text-outlined.rlink[href] {
+  --rlink-display: var(--text-outlined-display);
+  --rlink-color: var(--text-outlined-color, currentcolor);
+}
+
+.text-outlined:not(.rbutton) {
+  padding: var(--text-outlined-padding, 0.25rem);
+}
+
+.text-outlined.rbutton {
+  --rbutton-color: var(--text-outlined-color, currentcolor);
+  --rbutton-padding: var(--text-outlined-padding, 0.25rem);
+}
+
+/* 
+  text-outlined extension
+  
+  1. The transition property isn't used because there are limits of the 
+  transition property syntax, particularly multiple values can't be used. 
+  
+  2. I hide the lines so that they display the same regardless of what the 
+  element is. But I only show the line for interactive elements, i.e the 
+  button and the a
+  */
+
+/* extention #1 */
+
+.text-outlined::before,
+.text-outlined::after,
+.text-outlined__label::before,
+.text-outlined__label::after {
+  opacity: var(--text-outlined-line-opacity, 0); /* 2 */
+}
+
+.text-outlined:hover {
+  --text-outlined-line-opacity: var(
+    --text-outlined-line-opacity-hover,
+    1
+  ); /* 2 */
+}
+
+/* extention #2 */
+
+.text-outlined {
+  --default-ui-text-outlined-line-transition-property: var(
+    --default-text-outlined-line-transition-property,
+    transform,
+    opacity
+  );
+  --default-ui-text-outlined-line-transition-duration: var(
+    --default-text-outlined-line-transition-duration,
+    0.2s,
+    0.15s
+  );
+  --default-ui-text-outlined-line-transition-timing-function: var(
+    --default-text-outlined-line-transition-timing-function,
+    ease-out
+  );
+  --default-ui-text-outlined-line-transition-delay: var(
+    --default-text-outlined-line-transition-delay,
+    0s,
+    0.15s
+  );
+
+  overflow: hidden;
+}
+
+.text-outlined::before,
+.text-outlined::after,
+.text-outlined__label::before,
+.text-outlined__label::after {
+  will-change: var(
+    --ui-text-outlined-will-change,
+    var(--text-outlined-will-change, transform, opacity)
+  );
+}
+
+.text-outlined::before {
+  transform: var(
+    --ui-text-outlined-top-line-transform,
+    var(--text-outlined-top-line-transform, translate3d(-105%, 0, 0))
+  );
+  transition-property: var(
+    --ui-text-outlined-top-line-transition-property,
+    var(
+      --text-outlined-top-line-transition-property,
+      var(--default-ui-text-outlined-line-transition-property)
+    )
+  ); /* 1 */
+  transition-duration: var(
+    --ui-text-outlined-top-line-transition-duration,
+    var(
+      --text-outlined-top-line-transition-duration,
+      var(--default-ui-text-outlined-line-transition-duration)
+    )
+  ); /* 1 */
+  transition-timing-function: var(
+    --ui-text-outlined-top-line-transition-timing-function,
+    var(
+      --text-outlined-top-line-transition-timing-function,
+      var(--default-ui-text-outlined-line-transition-timing-function)
+    )
+  ); /* 1 */
+  transition-delay: var(
+    --ui-text-outlined-top-line-transition-delay,
+    var(
+      --text-outlined-top-line-transition-delay,
+      var(--default-ui-text-outlined-line-transition-delay)
+    )
+  ); /* 1 */
+}
+
+.text-outlined::after {
+  transform: var(
+    --ui-text-outlined-bottom-line-transform,
+    var(--text-outlined-bottom-line-transform, translate3d(105%, 0, 0))
+  );
+  transition-property: var(
+    --ui-text-outlined-bottom-line-transition-property,
+    var(
+      --text-outlined-bottom-line-transition-property,
+      var(--default-ui-text-outlined-line-transition-property)
+    )
+  ); /* 1 */
+  transition-duration: var(
+    --ui-text-outlined-bottom-line-transition-duration,
+    var(
+      --text-outlined-bottom-line-transition-duration,
+      var(--default-ui-text-outlined-line-transition-duration)
+    )
+  ); /* 1 */
+  transition-timing-function: var(
+    --ui-text-outlined-bottom-line-transition-timing-function,
+    var(
+      --text-outlined-bottom-line-transition-timing-function,
+      var(--default-ui-text-outlined-line-transition-timing-function)
+    )
+  ); /* 1 */
+  transition-delay: var(
+    --ui-text-outlined-bottom-line-transition-delay,
+    var(
+      --text-outlined-bottom-line-transition-delay,
+      var(--default-ui-text-outlined-line-transition-delay)
+    )
+  ); /* 1 */
+}
+
+.text-outlined__label::before {
+  transform: var(
+    --ui-text-outlined-left-line-transform,
+    var(--text-outlined-left-line-transform, translate3d(0%, -100%, 0))
+  );
+  transition-property: var(
+    --ui-text-outlined-left-line-transition-property,
+    var(
+      --text-outlined-left-line-transition-property,
+      var(--default-ui-text-outlined-line-transition-property)
+    )
+  ); /* 1 */
+  transition-duration: var(
+    --ui-text-outlined-left-line-transition-duration,
+    var(
+      --text-outlined-left-line-transition-duration,
+      var(--default-ui-text-outlined-line-transition-duration)
+    )
+  ); /* 1 */
+  transition-timing-function: var(
+    --ui-text-outlined-left-line-transition-timing-function,
+    var(
+      --text-outlined-left-line-transition-timing-function,
+      var(--default-ui-text-outlined-line-transition-timing-function)
+    )
+  ); /* 1 */
+  transition-delay: var(
+    --ui-text-outlined-left-line-transition-delay,
+    var(
+      --text-outlined-left-line-transition-delay,
+      var(--default-ui-text-outlined-line-transition-delay)
+    )
+  ); /* 1 */
+}
+
+.text-outlined__label::after {
+  transform: var(
+    --ui-text-outlined-right-line-transform,
+    var(--text-outlined-right-line-transform, translate3d(0%, 100%, 0))
+  );
+  transition-property: var(
+    --ui-text-outlined-right-line-transition-property,
+    var(
+      --text-outlined-right-line-transition-property,
+      var(--default-ui-text-outlined-line-transition-property)
+    )
+  ); /* 1 */
+  transition-duration: var(
+    --ui-text-outlined-right-line-transition-duration,
+    var(
+      --text-outlined-right-line-transition-duration,
+      var(--default-ui-text-outlined-line-transition-duration)
+    )
+  ); /* 1 */
+  transition-timing-function: var(
+    --ui-text-outlined-right-line-transition-timing-function,
+    var(
+      --text-outlined-right-line-transition-timing-function,
+      var(--default-ui-text-outlined-line-transition-timing-function)
+    )
+  ); /* 1 */
+  transition-delay: var(
+    --ui-text-outlined-right-line-transition-delay,
+    var(
+      --text-outlined-right-line-transition-delay,
+      var(--default-ui-text-outlined-line-transition-delay)
+    )
+  ); /* 1 */
+}
+
+.text-outlined:is(a, button):hover {
+  --ui-text-outlined-top-line-transform: var(
+    --text-outlined-top-line-transform-hover,
+    translate3d(0, 0, 0)
+  );
+  --ui-text-outlined-right-line-transform: var(
+    --text-outlined-right-line-transform-hover,
+    translate3d(0, 0, 0)
+  );
+  --ui-text-outlined-bottom-line-transform: var(
+    --text-outlined-bottom-line-transform-hover,
+    translate3d(0, 0, 0)
+  );
+  --ui-text-outlined-left-line-transform: var(
+    --text-outlined-left-line-transform-hover,
+    translate3d(0, 0, 0)
+  );
+
+  --ui-text-outlined-top-line-transition-property: var(
+    --text-outlined-top-line-transition-property-hover
+  );
+  --ui-text-outlined-right-line-transition-property: var(
+    --text-outlined-right-line-transition-property-hover
+  );
+  --ui-text-outlined-bottom-line-transition-property: var(
+    --text-outlined-bottom-line-transition-property-hover
+  );
+  --ui-text-outlined-left-line-transition-property: var(
+    --text-outlined-left-line-transition-property-hover
+  );
+
+  --ui-text-outlined-top-line-transition-duration: var(
+    --text-outlined-top-line-transition-duration-hover,
+    0.25s
+  );
+  --ui-text-outlined-right-line-transition-duration: var(
+    --text-outlined-right-line-transition-duration-hover,
+    0.25s
+  );
+  --ui-text-outlined-bottom-line-transition-duration: var(
+    --text-outlined-bottom-line-transition-duration-hover,
+    0.25s
+  );
+  --ui-text-outlined-left-line-transition-duration: var(
+    --text-outlined-left-line-transition-duration-hover,
+    0.25s
+  );
+
+  --ui-text-outlined-top-line-transition-timing-function: var(
+    --text-outlined-top-line-transition-timing-function-hover
+  );
+  --ui-text-outlined-right-line-transition-timing-function: var(
+    --text-outlined-right-line-transition-timing-function-hover
+  );
+  --ui-text-outlined-bottom-line-transition-timing-function: var(
+    --text-outlined-bottom-line-transition-timing-function-hover
+  );
+  --ui-text-outlined-left-line-transition-timing-function: var(
+    --text-outlined-left-line-transition-timing-function-hover
+  );
+
+  --ui-text-outlined-top-line-transition-delay: var(
+    --text-outlined-top-line-transition-delay-hover,
+    0s
+  );
+  --ui-text-outlined-right-line-transition-delay: var(
+    --text-outlined-right-line-transition-delay-hover,
+    0s
+  );
+  --ui-text-outlined-bottom-line-transition-delay: var(
+    --text-outlined-bottom-line-transition-delay-hover,
+    0s
+  );
+  --ui-text-outlined-left-line-transition-delay: var(
+    --text-outlined-left-line-transition-delay-hover,
+    0s
+  );
+
+  --ui-text-outlined-will-change: var(--text-outlined-will-change-hover);
+}
+
+/*
+  modifiers
+  */
+
+.text-outlined_v5 {
+  --text-outlined-top-line-transform: translate3d(-100%, 0, 0);
+  --text-outlined-right-line-transform: translate3d(0, -100%, 0);
+  --text-outlined-bottom-line-transform: translate3d(100%, 0, 0);
+  --text-outlined-left-line-transform: translate3d(0, 100%, 0);
+
+  --text-outlined-top-line-transform-hover: translate3d(0, 0, 0);
+  --text-outlined-right-line-transform-hover: translate3d(0 0, 0);
+  --text-outlined-bottom-line-transform-hover: translate3d(0, 0, 0);
+  --text-outlined-left-line-transform-hover: translate3d(0, 0, 0);
+
+  --text-outlined-top-line-transition-duration-hover: 0.25s;
+  --text-outlined-right-line-transition-duration-hover: 0.25s;
+  --text-outlined-bottom-line-transition-duration-hover: 0.25s;
+  --text-outlined-left-line-transition-duration-hover: 0.25s;
+
+  --text-outlined-top-line-transition-delay-hover: 0s;
+  --text-outlined-right-line-transition-delay-hover: 0s;
+  --text-outlined-bottom-line-transition-delay-hover: 0s;
+  --text-outlined-left-line-transition-delay-hover: 0s;
+}
+
+.text-outlined_v6 {
+  --text-outlined-top-line-transform: translate3d(-105%, 0, 0);
+  --text-outlined-right-line-transform: translate3d(0, -105%, 0);
+  --text-outlined-bottom-line-transform: translate3d(105%, 0, 0);
+  --text-outlined-left-line-transform: translate3d(0, 105%, 0);
+
+  --text-outlined-top-line-transition-duration: 0.2s;
+  --text-outlined-right-line-transition-duration: 0.2s;
+  --text-outlined-bottom-line-transition-duration: 0.2s;
+  --text-outlined-left-line-transition-duration: 0.2s;
+
+  --text-outlined-top-line-transition-delay: 0.35s;
+  --text-outlined-right-line-transition-delay: 0.25s;
+  --text-outlined-bottom-line-transition-delay: 0.15s;
+  --text-outlined-left-line-transition-delay: 0s;
+
+  --text-outlined-top-line-transform-hover: translate3d(0, 0, 0);
+  --text-outlined-right-line-transform-hover: translate3d(0 0, 0);
+  --text-outlined-bottom-line-transform-hover: translate3d(0, 0, 0);
+  --text-outlined-left-line-transform-hover: translate3d(0, 0, 0);
+
+  --text-outlined-top-line-transition-delay-hover: 0s;
+  --text-outlined-right-line-transition-delay-hover: 0.15s;
+  --text-outlined-bottom-line-transition-delay-hover: 0.25s;
+  --text-outlined-left-line-transition-delay-hover: 0.35s;
+}
+
+/*
+  =====
+  UNDERLINED TEXT
+  =====
+  */
+
+/*
+  basic
+  */
+
+.text-underlined {
+  /*
+    1. I use pixels units because others units (em, rem, vw, vh, etc) can
+    lead to the mistake of displaying a circumcised line
+    */
+
+  --ui-text-underlined-line-height: var(
+    --text-underlined-line-height,
+    2px
+  ); /* 1 */
+  --ui-text-underlined-line-gap: var(--text-underlined-line-gap, 0.5rem);
+  --ui-text-underlined-padding-bottom: calc(
+    var(--ui-text-underlined-line-height) + var(--ui-text-underlined-line-gap)
+  );
+
+  padding-bottom: var(--ui-text-underlined-padding-bottom) !important;
+  position: var(--text-underlined-position, relative) !important;
+}
+
+.text-underlined::after {
+  content: "";
+  width: var(--text-underlined-line-widht, 100%) !important;
+  height: var(--ui-text-underlined-line-height) !important;
+
+  background-color: var(--text-underlined-line-color, currentcolor) !important;
+
+  position: absolute;
+  left: var(--text-underlined-line-left, 0) !important;
+  bottom: var(--text-underlined-line-bottom, 0) !important;
+}
+
+/*
+  states
+  */
+
+.text-underlined:disabled {
+  opacity: var(--text-flat-opacity-disabled, 0.5);
+}
+
+/*
+  adapters
+  */
+
+.text-underlined:not(.rlink, .rbutton) {
+  display: var(--text-underlined-display, inline-flex);
+}
+
+/*
+  =====
+  DEMO
+  =====
+  */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Open Sans",
+    "Helvetica Neue", "Segoe UI", "Arial", sans-serif;
+  margin: 0;
+}
+
+.section {
+  padding: 7.25rem 1rem 6.5rem;
+  position: relative;
+}
+
+.section:nth-child(odd) {
+  background-color: #f1f4fa;
+}
+
+.section__label {
+  padding: 0.5rem 1.5rem;
+
+  font-size: 1rem;
+  color: #4e4848;
+  letter-spacing: 0.075rem;
+  font-weight: 700;
+  font-variant-caps: small-caps;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.section:nth-child(odd) .section__label {
+  background-color: #fff;
+}
+
+.section:nth-child(even) .section__label {
+  background-color: #f1f4fa;
+}
+
+.section__group {
+  margin: 0.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #243aab;
+  text-align: center;
+}
+
+@media (min-width: 641px) {
+  .section {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 1rem;
+  }
+}
