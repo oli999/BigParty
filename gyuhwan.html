@@ -20,6 +20,10 @@
         let list =[];
         document.querySelector("#Btn").addEventListener("click", function(){
             div = document.querySelector("#box")
+            ball = document.querySelectorAll(".ball")
+            if(ball.length>=6){
+                return;
+            }  else {
             for(let i=0; i<20; i++){
                 let ranNum = Math.floor(Math.random()*45);
                 let ran = ranNum+1;
@@ -40,16 +44,12 @@
                     let ran2=list[i]+1;
                     let img = document.createElement("img");
                     let path = "c:/acorn202104/visual_work/html/images/lotto-ball-" + ran2 + ".png"
-                    img.setAttribute("src", path)
-                    img.setAttribute("class", "ball")
+                    img.setAttribute("src", path);
+                    img.setAttribute("class", "ball");
                     img.setAttribute("height", "100");
                     img.setAttribute("width", "100");
                     div.append(img); 
             }
-            div = document.querySelectorAll(".class")
-            if(div.length>8){
-                b = document.createElement("br")
-                div.append(b);
             }
 
             /*    
@@ -63,13 +63,18 @@
         })
         document.querySelector("#Bonus").addEventListener("click", function(){
             div = document.querySelector("#box")
+            ball = document.querySelectorAll(".ball")
+            if(ball.length>=7){
+                return;
+            }
             for(let i=0; i<6; i++){
                 let ranNum = Math.floor(Math.random()*45);
                 let ran = ranNum+1;
                 if(list[i] != ran){
                     let img = document.createElement("img");
                     let path = "c:/acorn202104/visual_work/html/images/lotto-ball-" + ran + ".png"
-                    img.setAttribute("src", path)
+                    img.setAttribute("src", path);
+                    img.setAttribute("class", "ball");
                     img.setAttribute("height", "100");
                     img.setAttribute("width", "100");
                     div.append(img);
