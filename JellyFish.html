@@ -16,10 +16,65 @@
             text-shadow:0px 0px 3px tomato;
             color: white;
         }
+        fieldset{
+            width: 400px;
+            height: 50px;
+            border: 2px solid slateblue;
+            border-radius: 10px;
+        }
+        legend{
+            text-align: center;
+            color: slateblue;
+            font-weight: bold;
+        }
+        #playBtn{
+            font-family: 'Do Hyeon', sans-serif;
+            margin-right: -5px;
+            border: 1px solid slateblue;
+            background-color: white;
+            color: slateblue;
+            padding: 5px;
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        #pauseBtn{
+            font-family: 'Do Hyeon', sans-serif;
+            margin-right: 5px;
+            border: 1px solid slateblue;
+            background-color: white;
+            color: slateblue;
+            padding: 5px;
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        #nowPlay{
+            color: slateblue;
+        }
+        #musicBtn button:hover{
+            color: white;
+            background-color: slateblue;
+        }
     </style>
 </head>
 <body>
     <h1>Hannah's JellyFish</h1>
     <img src="Berry01.png" alt="Image">
+    <fieldset>
+        <legend>두구두구한 음악 재생</legend>
+        <span id="musicBtn">
+        <button id="playBtn">play</button>
+        <button id="pauseBtn">pause</button>
+        </span>
+        <span id="nowPlay">Now playing : Hologram-Bobby Richards.mp3</span>
+    </fieldset>
+    <script>
+        const sound=new Audio("\Hologram - Bobby Richards.mp3");
+        document.querySelector("#playBtn").addEventListener("click", function(){
+            sound.play();
+        });
+        document.querySelector("#pauseBtn").addEventListener("click", function(){
+            sound.pause();
+        });
+    </script>
 </body>
 </html>
