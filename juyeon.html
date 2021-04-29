@@ -1,12 +1,28 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>juyeon.html</title>
+<style>
+    img{
+        animation: ani 3s infinite alternate;
+        position:absolute; /*에니메이션 쓰고 싶으면 포지션 지정해줘야함.*/
+    }
+
+    @keyframes ani{
+        0% {left:0; top:0;}
+        25% {left:400px;top:0}
+        50% {left:400px;top:300px}
+        75% {left:0;top:300px}
+        100% {left:0;top:0}
+
+    }
+
+
+</style>
 </head>
 <body>
-    <h1>주연의 html</h1>
+    <img src="img/cat2.jpg" alt="cat2" width="200px"></div>
+    
 </body>
 </html>
