@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>uram.html</title>
+    <style>
+        canvas{
+            border: 1px dotted gray;
+            cursor: crosshair;
+        }
+    </style>
 </head>
 <body>
     <h1>누가 누가 이길까? 가위-바위-보오 게임!</h1>
@@ -16,7 +22,46 @@
         let canvas=document.querySelector("#myCanvas");
         let context=canvas.getContext("2d");
 
-  
+        let Scissors=new Image();
+        Scissors.src="img/가위.jpg";
+        let rock=new Image();
+        rock.src="img/바위.jpg";
+        let Bo=new Image();
+        Bo.src="img/보.jpg";
+    
+        let handIndex=0;
+        let count=0;
+
+        const oneHands=[Scissors, rock, Bo, rock];
+
+        function drawCanvas(){
+            context.drawImage(oneHands[handIndex],0,0,300,300)};
+
+        function handsAni(){
+            if(count%10 == 0){
+                handIndex++;
+                if(handIndex==3){
+                    handIndex=0; 
+                }
+            }
+
+        }
+
+        setInterval(function(){    
+            //만일 게임이 시작되지 않았다면
+            if(!isStarted){
+                return;
+            }
+            
+            count++;        
+            handsAni();
+            drawCanvas();
+
+        }, 20);
+
+        document.querySelector("#startBtn").addEventListener("click", function(){
+            isStarted=true;
+        });
     </script>
     
 </body>
