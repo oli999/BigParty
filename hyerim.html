@@ -16,11 +16,23 @@
 </head>
 <body>
     <h1>윤혜림이 만들었습니다.</h1>
-    <button id="getBtn">버튼만들기</button>
+    <h3>당신의 행운의 색상은?</h3>
+    <button id="getBtn">행운컬러</button>
+    <div>나의 컬러는?<br/>
+        <div>R = <p id="R"></p></div>
+        <div>G = <p id="G"></p></div>
+        <div>B = <p id="B"></p></div>
+    </div>
 
     <script>
-        document.querySelector("#getBtn").addEventListener("click",function(){
-            alert("잘 만들었다!");
+        
+        document.querySelector("#getBtn").addEventListener("click", function(){
+            let r = Math.floor(Math.random()*256);
+            document.querySelector("#R").innerText=r;
+            let g = Math.floor(Math.random()*256);
+            document.querySelector("#G").innerText=g;
+            let b = Math.floor(Math.random()*256);
+            document.querySelector("#B").innerText=b;
         });
     </script>
 
