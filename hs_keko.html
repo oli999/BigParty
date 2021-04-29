@@ -5,9 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hs_keko.html</title>
+    <style>
+        .banner{
+            width: 50px;
+            height: 50px;
+            border-width: 1px;
+            border-style: solid;
+        }
+        .icon{
+            width: 50px;
+            height: 50px;
+        }
+        #cat{
+            width: 200px;
+            height: 200px;
+        }
+        #catDiv{
+            width: 200px;
+            height: 200px;
+        }
+        
+    </style>
 </head>
 <body>
-    <img src="img/cat.jpg" alt="두발로 선 고양이">
-    
+    <h1>우리집 고영희도 자주쓰는 웹사이트 바로가기</h1><br>
+    <a href="https://github.com"><div id="catDiv"><img id="cat" src="img/cat.jpg" alt="고영희"></div></a><br>
+    <a href="https://naver.com"><div class="banner"><img class="icon" src="img/naver.png" alt="네이버"></div></a><br>
+    <a href="https://daum.net"><div class="banner"><img class="icon" src="img/daum.ico" alt="다음"></div></a><br>
+    <a href="https://google.net"><div class="banner"><img class="icon" src="img/google.png" alt="구글"></div></a><br>
+    <a href="https://facebook.com"><div class="banner"><img class="icon" src="img/facebook.png" alt="페이스북"></div></a><br>
+    <a href="https://instagram.com"><div class="banner"><img class="icon" src="img/instagram.png" alt="인스타그램"></div></a>
+
+    <script>
+        document.querySelector("#banner1").addEventListener("click",function(){
+
+        });
+    </script>
 </body>
 </html>
